@@ -14,14 +14,41 @@ import Colors from "../constants/Colors";
 
 const StartGameScreen = (props: Props) => {
   const [enteredNumber, setEnteredNumber] = useState<string>("");
+  const [selectedNumber, setSelectedNumber] = useState<number>(0);
+  const [confirmed, setConfirmed] = useState<boolean>(false);
 
   const onEnteredNumberChange = (value: string) => {
     setEnteredNumber(value.replace(/[^0-9]/g, ""));
   };
 
+  const onResetEnteredNumber = () => {
+    setEnteredNumber("");
+    setSelectedNumber(0);
+    setConfirmed(false);
+    onDissmissKeyboard();
+  };
+
+  const onConfirmEnteredNumber = () => {
+    const chosenNumber = parseInt(enteredNumber);
+    console.log(chosenNumber);
+    if (isNaN(chosenNumber) || chosenNumber < 1 || chosenNumber > 99) {
+      console.log("inside called");
+      return;
+    }
+    setConfirmed(true);
+    setSelectedNumber(chosenNumber);
+    setEnteredNumber("");
+    onDissmissKeyboard();
+  };
+
   const onDissmissKeyboard = () => {
     Keyboard.dismiss();
   };
+
+  let confirmedOutput;
+  if (confirmed) {
+    confirmedOutput = <Text>Choosen number: {selectedNumber}</Text>;
+  }
 
   return (
     <TouchableWithoutFeedback onPress={onDissmissKeyboard}>
@@ -44,18 +71,19 @@ const StartGameScreen = (props: Props) => {
               <Button
                 title="Reset"
                 color={Colors.accent}
-                onPress={onDissmissKeyboard}
+                onPress={onResetEnteredNumber}
               />
             </Pressable>
             <Pressable style={styles.button}>
               <Button
                 title="Confirm"
                 color={Colors.primary}
-                onPress={onDissmissKeyboard}
+                onPress={onConfirmEnteredNumber}
               />
             </Pressable>
           </View>
         </Card>
+        {confirmedOutput}
       </View>
     </TouchableWithoutFeedback>
   );
