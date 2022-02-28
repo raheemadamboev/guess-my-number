@@ -7,10 +7,11 @@ import {
   Pressable,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert
+  Alert,
 } from "react-native";
 import Card from "../components/Card";
 import Input from "../components/Input";
+import SummeryContainer from "../components/SummaryContainer";
 import Colors from "../constants/Colors";
 
 const StartGameScreen = (props: Props) => {
@@ -39,11 +40,11 @@ const StartGameScreen = (props: Props) => {
           {
             text: "Okay",
             style: "destructive",
-            onPress: onResetEnteredNumber
-          }
+            onPress: onResetEnteredNumber,
+          },
         ],
         { cancelable: false }
-      )
+      );
       return;
     }
     setConfirmed(true);
@@ -58,7 +59,17 @@ const StartGameScreen = (props: Props) => {
 
   let confirmedOutput;
   if (confirmed) {
-    confirmedOutput = <Text>Choosen number: {selectedNumber}</Text>;
+    confirmedOutput = (
+      <Card style={styles.summaryContainer}>
+        <Text>You selected</Text>
+        <SummeryContainer text={selectedNumber.toString()} />
+        <Button
+          title="START GAME"
+          color={Colors.primary}
+          onPress={props.onStartGame.bind(this, selectedNumber)}
+        />
+      </Card>
+    );
   }
 
   return (
@@ -112,8 +123,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   inputContainer: {
-    width: 300,
-    maxWidth: "80%",
+    width: "80%",
     alignItems: "center",
   },
   input: {
@@ -129,8 +139,15 @@ const styles = StyleSheet.create({
   button: {
     width: "40%",
   },
+  summaryContainer: {
+    width: "80%",
+    marginTop: 20,
+    alignItems: "center",
+  },
 });
 
-export type Props = {};
+export type Props = {
+  onStartGame: (selectedNumber: number) => void;
+};
 
 export default StartGameScreen;
