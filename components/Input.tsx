@@ -1,8 +1,8 @@
 import React from "react";
-import { TextInput, StyleSheet, TextInputProps, ViewStyle } from "react-native";
+import { TextInput, StyleSheet, TextInputProps } from "react-native";
 
 const Input = (props: Props) => {
-  return <TextInput {...props} style={{...styles.input, ...props.style}} />;
+  return <TextInput {...props} style={{ ...styles.input, ...props.style }} />;
 };
 
 const styles = StyleSheet.create({
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 });
 
 interface Props extends TextInputProps {
-    style?: {}
+  style?: {};
 }
 
 export default Input;

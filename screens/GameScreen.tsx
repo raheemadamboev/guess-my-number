@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, View, Text, Button, Alert } from "react-native";
 import Card from "../components/Card";
-import SummeryContainer from "../components/SummaryContainer";
+import SummaryContainer from "../components/SummaryContainer";
 import Colors from "../constants/Colors";
 
 const generateRandomBetween = (
@@ -75,7 +75,7 @@ const GameScreen = (props: Props) => {
   return (
     <View style={styles.screen}>
       <Text>Opponent's Guess</Text>
-      <SummeryContainer text={currentGuess.toString()} />
+      <SummaryContainer text={currentGuess.toString()} />
       <Card style={styles.buttonContainer}>
         <Button
           title="LOWER"

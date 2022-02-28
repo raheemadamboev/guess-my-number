@@ -2,7 +2,7 @@ import React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import Colors from "../constants/Colors";
 
-const SummeryContainer = (props: Props) => {
+const SummaryContainer = (props: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.number}>{props.text}</Text>
@@ -30,4 +30,4 @@ export type Props = {
   text: string;
 };
 
-export default SummeryContainer;
+export default SummaryContainer;

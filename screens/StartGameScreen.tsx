@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import Card from "../components/Card";
 import Input from "../components/Input";
-import SummeryContainer from "../components/SummaryContainer";
+import SummaryContainer from "../components/SummaryContainer";
 import Colors from "../constants/Colors";
 
 const StartGameScreen = (props: Props) => {
@@ -62,7 +62,7 @@ const StartGameScreen = (props: Props) => {
     confirmedOutput = (
       <Card style={styles.summaryContainer}>
         <Text>You selected</Text>
-        <SummeryContainer text={selectedNumber.toString()} />
+        <SummaryContainer text={selectedNumber.toString()} />
         <Button
           title="START GAME"
           color={Colors.primary}
