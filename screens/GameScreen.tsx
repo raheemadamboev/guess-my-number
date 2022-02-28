@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, View, Text, Button, Alert } from "react-native";
 import Card from "../components/Card";
 import SummeryContainer from "../components/SummaryContainer";
@@ -23,9 +23,18 @@ const GameScreen = (props: Props) => {
   const [currentGuess, setCurrentGuess] = useState<number>(
     generateRandomBetween(1, 100, props.userChoice)
   );
+  const [rounds, setRounds] = useState<number>(0);
 
   const currentLow = useRef<number>(1);
   const currentHigh = useRef<number>(100);
+
+  const { userChoice, onGameOver } = props;
+
+  useEffect(() => {
+    if (currentGuess === props.userChoice) {
+      props.onGameOver(rounds);
+    }
+  }, [currentGuess, userChoice, onGameOver]);
 
   const nextGuessHandler = (direction: Direction) => {
     if (
@@ -59,6 +68,8 @@ const GameScreen = (props: Props) => {
         currentGuess
       )
     );
+
+    setRounds((currentRounds) => currentRounds + 1);
   };
 
   return (
@@ -97,6 +108,7 @@ const styles = StyleSheet.create({
 
 export type Props = {
   userChoice: number;
+  onGameOver: (rounds: number) => void;
 };
 
 export default GameScreen;
