@@ -1,40 +1,63 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Pressable,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import Card from "../components/Card";
 import Input from "../components/Input";
 import Colors from "../constants/Colors";
 
 const StartGameScreen = (props: Props) => {
   const [enteredNumber, setEnteredNumber] = useState<string>("");
+
   const onEnteredNumberChange = (value: string) => {
     setEnteredNumber(value.replace(/[^0-9]/g, ""));
   };
 
+  const onDissmissKeyboard = () => {
+    Keyboard.dismiss();
+  };
+
   return (
-    <View style={styles.screen}>
-      <Text style={styles.title}>The game screen!</Text>
-      <Card style={styles.inputContainer}>
-        <Text>Select a number</Text>
-        <Input
-          style={styles.input}
-          blurOnSubmit
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="number-pad"
-          maxLength={2}
-          value={enteredNumber}
-          onChangeText={onEnteredNumberChange}
-        />
-        <View style={styles.buttonContainer}>
-          <Pressable style={styles.button}>
-            <Button title="Reset" color={Colors.accent} onPress={() => {}} />
-          </Pressable>
-          <Pressable style={styles.button}>
-            <Button title="Confirm" color={Colors.primary} onPress={() => {}} />
-          </Pressable>
-        </View>
-      </Card>
-    </View>
+    <TouchableWithoutFeedback onPress={onDissmissKeyboard}>
+      <View style={styles.screen}>
+        <Text style={styles.title}>The game screen!</Text>
+        <Card style={styles.inputContainer}>
+          <Text>Select a number</Text>
+          <Input
+            style={styles.input}
+            blurOnSubmit
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="number-pad"
+            maxLength={2}
+            value={enteredNumber}
+            onChangeText={onEnteredNumberChange}
+          />
+          <View style={styles.buttonContainer}>
+            <Pressable style={styles.button}>
+              <Button
+                title="Reset"
+                color={Colors.accent}
+                onPress={onDissmissKeyboard}
+              />
+            </Pressable>
+            <Pressable style={styles.button}>
+              <Button
+                title="Confirm"
+                color={Colors.primary}
+                onPress={onDissmissKeyboard}
+              />
+            </Pressable>
+          </View>
+        </Card>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
