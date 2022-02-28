@@ -19,7 +19,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  headerText: {},
+  headerText: {
+    fontSize: 20,
+    color: "white",
+  },
 });
 
 export type Props = {
